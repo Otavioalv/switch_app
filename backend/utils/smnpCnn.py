@@ -7,6 +7,10 @@ import pprint
 
 async def snmp_get(host, community, oid):
     try:
+        
+        print("SMNP GET: ", host, community, oid)
+        
+        
         snmpEngine = SnmpEngine()
         port = 161
         iterator = get_cmd(snmpEngine,
@@ -19,11 +23,10 @@ async def snmp_get(host, community, oid):
         errorIndication, errorStatus, errorIndex, varBinds = await iterator
 
         if errorIndication:
-            # print(f"snmp_get ERROR >>> {errorIndication}\n")
+            print(f"snmp_get ERROR INDICATOR >>> {errorIndication}\n")
             return None
         elif errorStatus:
-            # print(f'snmp_get ERROR >>> {errorStatus.prettyPrint()} at {errorIndex and varBinds[int(errorIndex) - 1][0] or "?"} \n')
-            
+            print(f'snmp_get ERROR STATUS >>> {errorStatus.prettyPrint()} at {errorIndex and varBinds[int(errorIndex) - 1][0] or "?"} \n')
             return None
         else:
             for varBind in varBinds:
@@ -47,9 +50,11 @@ async def snmp_get(host, community, oid):
                 # else:
                 #     # Para INTEGER, COUNTER, GAUGE etc.
                 #     print(int(value))
+                
+            
             return value
     except Exception as err:
-        # print(f"snmp_get ERROR >>> {err}\n")
+        print(f"snmp_get ERROR >>> {err}\n")
         return None
     
     

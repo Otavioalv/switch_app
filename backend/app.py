@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
+from routers import switch
 
 app = Flask(__name__)
+
+app.register_blueprint(switch.switch_bp)
 
 
 @app.route('/health', methods=["GET"])
