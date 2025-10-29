@@ -18,5 +18,10 @@ oids_list = [
         "name": "sysName",
         "oid": "1.3.6.1.2.1.1.5.0" ,
         "description": "Nome do switch"
+    },
+    {
+        "name": "ifNumber", 
+        "oid": "1.3.6.1.2.1.2.1.0",
+        "description": "Retorna o numero de interfaces switch"
     }
 ]

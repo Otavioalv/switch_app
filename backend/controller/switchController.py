@@ -29,9 +29,9 @@ class switchController():
                 "results": [ip_sw]
             })
         except Exception as e:
-            print("error: get_info_ports")
+            print("error: get_info_ports >>> ", e)
             
             return jsonify({
-                "message": "Erro interno no servidor",
+                "message": "Erro ao coletar dados",
                 "results": []
             })
