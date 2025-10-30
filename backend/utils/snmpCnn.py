@@ -2,8 +2,9 @@ from pysnmp.hlapi.v1arch.asyncio import *
 import asyncio
 
     
-async def smnp_get(host, community, oid):
+async def snmp_get(host, community, oid):
     try:
+        print("get: ", host)
         
         iterator = await get_cmd(
             SnmpDispatcher(),
@@ -57,7 +58,9 @@ async def smnp_get(host, community, oid):
     
 # print("VAlor: ", asyncio.run(snmp_get('172.21.0.19', '1np@net_ro', '1.3.6.1.2.1.2.1.0')))
     
-async def smnp_bulk(host, community, oid, end, start=0):
+async def snmp_bulk(host, community, oid, end, start=0):
+    print("bulk: ", host)
+    
     results = []
     
     errorIndication, errorStatus, errorIndex, varBinds = await bulk_cmd(
@@ -71,13 +74,14 @@ async def smnp_bulk(host, community, oid, end, start=0):
     
     
     for oid, value in varBinds:
-        print(f"{oid} = {value}")
+        # print(f"{oid} = {value}")
         results.append((str(oid), str(value)))
     
-    print(results)
+    
+    return results
     
 
 
-# interface_count = asyncio.run(smnp_get('172.27.0.27', '1np@net_ro', '1.3.6.1.2.1.2.1.0'))
+# interface_count = asyncio.run(snmp_get('172.22.0.18', '1np@net_ro', '1.3.6.1.2.1.2.1.0'))
 # print("Interfaces: ", interface_count)
-# print("VAlor: ", asyncio.run(smnp_bulk('172.27.0.27', '1np@net_ro', '1.3.6.1.2.1.2.2.1.7', end=interface_count)))
+# print("VAlor: ", asyncio.run(snmp_bulk('172.22.0.18', '1np@net_ro', '1.3.6.1.2.1.2.2.1.7', end=interface_count)))
