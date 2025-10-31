@@ -24,3 +24,12 @@ def get_blocked_ports(ip_sw=None):
         result = switch_crt.get_info_ports(ip_sw)
         
         return result
+    
+@switch_bp.route("list-switches", methods=["POST"])
+def list_switches():
+    if request.method == "POST":
+        
+        switch_ctr = switchController()
+        result = switch_ctr.get_list_switches()
+        
+        return result

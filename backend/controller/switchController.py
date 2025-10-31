@@ -21,7 +21,7 @@ class switchController():
                 })
                 
             # Todos ips
-            # Fazer looping repetição todos switchs
+            # Fazer looping repetição todos switches
             # ip_sw = '172.22.0.18'
             response = []
             for ip in ip_switch_list:
@@ -31,6 +31,36 @@ class switchController():
             return jsonify({
                 "message": "Informações coletadas com sucesso",
                 "results": [response]
+            })
+        except Exception as e:
+            print("error: get_info_ports >>> ", e)
+            
+            return jsonify({
+                "message": "Erro ao coletar dados",
+                "results": []
+            })
+        
+    # Retorna lista de informações dos switches
+    def get_list_switches(self):
+        try:
+            
+            result = []
+            for ip in ip_switch_list[:10]:
+                interface_number = self.sw_model.interface_number(ip)
+                result_sys_name = self.sw_model.sys_name(ip)
+                status = "success" if interface_number or result_sys_name else "error"
+                
+                info_sw = {
+                    "status": status,
+                    "ip_switch": ip,
+                    "switch_name": result_sys_name, 
+                    "interface_number": interface_number,
+                }
+                
+                result.append(info_sw)
+            return jsonify({
+                "message": "Informações coletadas com sucesso",
+                "results": result
             })
         except Exception as e:
             print("error: get_info_ports >>> ", e)
@@ -53,6 +83,8 @@ class switchController():
             oper_status = [item[1] for item in result_oper_status]
             desc_ports = [item[1] for item in result_desc_ports]
             
+            status = "success" if ip_sw or result_sys_name or interface_number or joint_interpretation else "error"
+            
             joint_interpretation = self.__interpret_blocked_ports(admin_status, oper_status, desc_ports)
             
             # print(list_admin_status, list_oper_status)
@@ -62,6 +94,7 @@ class switchController():
                 # "admin_status_ports": result_admin_status,
                 # "oper_status_port": result_oper_status,
                 # "desc_ports": result_desc_ports,
+                "status": status,
                 "ip_switch": ip_sw,
                 "switch_name": result_sys_name, 
                 "interface_number": interface_number,
