@@ -1,5 +1,6 @@
 import type { infoStatusType } from "../../consts/mokMonitor"
 // import { lightTheme } from "../../theme/themes"
+// import { FaNetworkWired } from "react-icons/fa";
 
 export type InfoSwitchCardProps = {
     infoSwitch: infoStatusType
