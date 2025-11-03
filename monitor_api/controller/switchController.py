@@ -29,7 +29,7 @@ class switchController():
             
             return jsonify({
                 "message": "Informações coletadas com sucesso",
-                "results": [response]
+                "results": response
             })
         except Exception as e:
             print("error: get_info_ports >>> ", e)
