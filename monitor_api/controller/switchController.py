@@ -12,17 +12,16 @@ class switchController():
         
     def get_info_ports(self, ip_sw=None):
         try:
+            # Faz busca com 1 ip
             if ip_sw: 
-                print("Unico ip")
+                # print("Unico ip")
                 response = self.__exec_info_ports(ip_sw)
                 return jsonify({
                     "message": "Informações coletadas com sucesso",
                     "results": [response]
                 })
-                
-            # Todos ips
-            # Fazer looping repetição todos switches
-            # ip_sw = '172.22.0.18'
+            
+            # Faz busca com TODOS os IPs
             response = []
             for ip in ip_switch_list:
                 result = self.__exec_info_ports(ip)
@@ -45,7 +44,8 @@ class switchController():
         try:
             
             result = []
-            for ip in ip_switch_list[:10]:
+            # Limitado propositalmente
+            for ip in ip_switch_list:
                 interface_number = self.sw_model.interface_number(ip)
                 result_sys_name = self.sw_model.sys_name(ip)
                 status = "success" if interface_number or result_sys_name else "error"
@@ -121,10 +121,10 @@ class switchController():
         try:
             status_ports_list = []
             
-            pairs = list(zip(admin_status, oper_status, desc_ports))
+            trio = list(zip(admin_status, oper_status, desc_ports))
             
             
-            for values in pairs:
+            for values in trio:
                 status = "error_identification"
                 port = values[2]
                 
