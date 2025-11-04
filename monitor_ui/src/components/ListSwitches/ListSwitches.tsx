@@ -3,7 +3,7 @@ import { InfoSwitchCard } from "../InfoSwitchCard/InfoSwitchCard"
 
 export const ListSwiches = () => {
     return (
-        <div className="flex flex-col gap-1">
+        <div className="grid grid-cols-2 gap-4">
             {blockedPorts.results.map((infoSwitch, i) => (
                 <InfoSwitchCard infoSwitch={infoSwitch} key={i}/>
             ))}
