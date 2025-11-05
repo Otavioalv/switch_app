@@ -83,7 +83,8 @@ class switchController():
             oper_status = [item[1] for item in result_oper_status]
             desc_ports = [item[1] for item in result_desc_ports]
             
-            status = "success" if ip_sw or result_sys_name or interface_number or joint_interpretation else "error"
+            # Verificar se da erro
+            status = "success" if ip_sw or result_sys_name or interface_number or len(joint_interpretation) else "error"
             
             joint_interpretation = self.__interpret_blocked_ports(admin_status, oper_status, desc_ports)
             

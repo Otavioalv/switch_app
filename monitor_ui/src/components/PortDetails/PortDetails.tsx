@@ -16,7 +16,7 @@ export const PortDetails = ({listPort, title, regexOpc} : PortDetailsProps) => {
                     <span>
                         {title}
                     </span>
-                    <div className="grid grid-cols-8 gap-4">
+                    <div className="grid grid-cols-8 gap-3">
                         {listPort.map((l, i) => (
                             <div 
                                 className={`
@@ -28,7 +28,8 @@ export const PortDetails = ({listPort, title, regexOpc} : PortDetailsProps) => {
                                                 ? "bg-red-300 border-red-400" 
                                                 : "bg-green-200 border-green-500"
                                     } 
-                                    text-center p-3 rounded-lg
+                                    text-center rounded-lg p-1 w-full h-fit
+                                    text-xs
                                 `}
                                 key={i}
                             >
