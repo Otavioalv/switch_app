@@ -50,6 +50,8 @@ class switchController():
                 result_sys_name = self.sw_model.sys_name(ip)
                 status = "success" if interface_number or result_sys_name else "error"
                 
+                # print("AAAAAAAAAAAAAAAAA" if interface_number or result_sys_name else "error")
+                
                 info_sw = {
                     "status": status,
                     "ip_switch": ip,
@@ -83,13 +85,10 @@ class switchController():
             oper_status = [item[1] for item in result_oper_status]
             desc_ports = [item[1] for item in result_desc_ports]
             
-            # Verificar se da erro
-            status = "success" if ip_sw or result_sys_name or interface_number or len(joint_interpretation) else "error"
-            
             joint_interpretation = self.__interpret_blocked_ports(admin_status, oper_status, desc_ports)
             
-            # print(list_admin_status, list_oper_status)
-            
+            # Verificar se da erro
+            status = "success" if result_sys_name or interface_number or len(joint_interpretation) else "error"
             
             response = {
                 # "admin_status_ports": result_admin_status,
@@ -104,6 +103,7 @@ class switchController():
             
             return response
         except Exception as e:
+            print("Erro ao coletar dados >>> ", e)
             raise Exception("Erro ao coletar dados")
     
     
