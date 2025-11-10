@@ -1,5 +1,5 @@
 import { useEffect,  useState } from "react";
-import type { infoStatusType, statusPortType } from "../../consts/mokMonitor"
+import type { infoStatusType, statusPortType } from "../../types/switchType"
 // import { lightTheme } from "../../theme/themes"
 import { PortDetails } from "../PortDetails/PortDetails";
 import { InfoStatusSw } from "../InfoStatusSw/InfoStatusSw";

@@ -3,8 +3,9 @@ import type { IconType } from "react-icons";
 export type InfoGeneralCardProps = {
     icon: IconType,
     title: string,
-    info: string | number,
-    optColor?: string
+    info: number,
+    totalInfo?: number
+    optColor?: string,
 }
 
 export const InfoGeneralCard = ({icon: Icon, info, title, optColor="text-black"}: InfoGeneralCardProps) => {
